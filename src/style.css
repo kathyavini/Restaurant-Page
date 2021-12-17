@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2&family=Langar&family=Montez&family=Noto+Sans&display=swap');
+
+* {
+    /* border: 1px #9a13fd solid; */
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    place-items: center;
+    font-family: "Noto Sans", sans-serif;
+    background-color: #dbc18f;
+    color: hsl(223, 54%, 15%);
+    /* color: hsl(0, 0%, 100%); */
+    overflow: hidden;
+    backface-visibility: hidden;
+    position: relative;
+}
+
+
+#content {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    place-items: center;
+}
+
+.background {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    /* width: min(95%, 1920px);
+    height: min(95%, 1080px); */
+    /* aspect-ratio: 1.5; */
+    /* background-image: url('./img/landing-page.svg'); */
+    background-image:
+        url('./img/mysore-pak.jpg'),
+        url('./img/ladoos.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #121e3d;
+    /* transform: translate3d(0,0,0) scale(1.3); */
+    transform: translate(50px, 50px) scale(1.25);
+}
+
+.background.second-image {
+    background-image: 
+        url('./img/ladoos.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    transform: scale(1.25);
+}
+
+.background.third-image {
+    background-image: url('./img/gujiya.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    transform: translate(50px, -300px) scale(1.25);
+}
+
+
+@media (prefers-reduced-motion: no-preference) {
+    .transformed {
+        transform: scale(1);
+        transition: transform 6.5s ease-in-out;
+    }
+
+    .second-image.transformed {
+        transition: transform 4.5s ease-in-out;
+    }
+}
+
+nav {
+    grid-area: 1 / 1 / 1 / 4;
+    align-self: start;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8vw;
+    margin-top: 50px;
+    padding-inline: 4rem;
+    padding-block: 1rem;
+    z-index: 100;
+    font-size: 2rem;
+    text-transform: uppercase;
+    /* background-color: hsl(39, 51%, 71%, .5); */
+    mix-blend-mode: multiply;
+}
+
+.tab {
+    transition: all 300ms;
+}
+
+.tab:hover {
+    transform: scale(1.2);
+}
+
+.tab.active {
+    border-bottom: 2px #eff9fa solid;
+    border-top: 3px transparent solid;
+    padding: 3px;
+}
+
+.small-image {
+    position: absolute;
+    width: 300px;
+    height: auto;
+    inset-block: 300px;
+    inset-inline: 200px;
+    opacity: 0;
+    z-index: 999;
+    background-image: url('./img/gujiya.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: opacity 1s;
+}
+
+div.small-image.visible {
+    opacity: 1;
+    transition: opacity 1s;
+}
+
+
+video {
+    opacity: 0;
+
+    /* position: absolute;
+    inset-block: 30vh;
+    inset-inline: 20vw; */
+    width: 100%;
+    grid-area: 1 / 1 / 4 / 4;
+    place-self: center;
+    z-index: 999;
+    /* place-self: initial; */
+    animation: fadeOut 2s forwards;
+}
+
+video.visible {
+    opacity: .8;
+    transition: opacity 3s 5s;
+    animation: fadeIn 10s forwards;
+}
+
+button {
+    z-index: 100;
+    grid-area: 2 / 2 / 3 / 3;
+    background-color: hsl(39, 51%, 71%, .5);
+    mix-blend-mode: overlay;
+    place-self: center;
+    font-size: 2rem;
+    padding-inline: 50px;
+    padding-block: 10px;
+    border: 1px solid white;
+    transition: opacity 3s;
+    border-radius: 5px;
+}
+
+/* h1 {
+    position: absolute;
+    inset-block: 40vh;
+    inset-inline: 10vw; */
+    /* grid-area: 2 / 1 / 3 / 4;
+    justify-self: center; */
+    /* display: grid;
+    place-items: center;
+    mix-blend-mode: overlay;
+    font-size: 6rem;
+    padding: 1rem;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0s;
+    pointer-events: none;
+} */
+
+.punjabi,
+.english {
+    color: white;
+    mix-blend-mode: overlay;
+    /* inset-inline: 10%; */
+    line-height: 10rem;
+    z-index: 1002;
+    pointer-events: none;
+}
+
+.punjabi {
+    font-size: 10rem;
+    grid-area: 2 / 2 / 3 / 3;
+    /* position: absolute;
+    inset-block: 20vh;
+    inset-inline: 30vw; */
+    opacity: 0;
+    font-family: 'Langar', sans-serif;
+
+    /* visibility: hidden; */
+}
+
+.punjabi.visible {
+    opacity: 1;
+    transition: opacity 2s 5s;
+}
+
+.punjabi span {
+    font-size: 4rem;
+}
+
+.english {
+    mix-blend-mode: overlay;
+    opacity: 0;
+    grid-area: 2 / 1 / 2 / 4;
+    /* display: flex;
+    flex-flow: column wrap; */
+}
+
+.english h1{
+    text-transform: uppercase;
+    font-size: 7rem;
+}
+
+.english p{
+    font-family: 'Montez', sans-serif;
+    font-size: 5rem;
+    text-align: left;
+}
+
+.punjabi.transitioned {
+    opacity: 0;
+    transition: opacity 1s 3s;
+}
+
+.english.transitioned {
+    opacity: 1;
+    transition: opacity 1s 3s;
+}
+
+
+
+@keyframes fadeIn{
+    0%      { opacity: 0; }
+    100%    { opacity: 1; }
+}
+
+@keyframes fadeOut{
+    0%      { opacity: 1; }
+    100%    { opacity: 0; }
+}
