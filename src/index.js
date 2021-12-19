@@ -30,6 +30,7 @@ startButton.addEventListener('click', () => {
     background.addEventListener('transitionend', changeImage);
     startButton.style.opacity = '0';
     skipButton.style.opacity = '1';
+    skipButton.style.pointerEvents = 'initial';
 })
 
 skipButton.addEventListener('click', () => {
@@ -81,13 +82,15 @@ function makeFinalState() {
 
 let introTab = document.querySelector('#intro');
 introTab.addEventListener('click', () => {
+    menuTab.classList.add('current');
     makeInitialState();
 });
 
 function makeInitialState() {
     clearMenu();
     clearAbout();
-    startButton.pointerEvents = 'initial';
+    skipButton.style.pointerEvents = 'none';
+    startButton.style.pointerEvents = 'initial';
     english.style.visibility = 'visible';
     punjabi.classList.remove('visible');
     punjabi.classList.remove('transitioned');
@@ -106,6 +109,7 @@ function makeInitialState() {
 let menuTab = document.querySelector('#menu');
 menuTab.addEventListener('click', () => {
     clearMain();
+    clearAbout();
     showMenu();
 });
 
@@ -117,7 +121,7 @@ function clearMain() {
 let menu = document.querySelector('.menu');
 function showMenu() {
     menuTab.classList.add('current');
-    startButton.pointerEvents = 'none';
+    startButton.style.pointerEvents = 'none';
     menu.classList.add('onLoad');
     menu.classList.add('show');
 }
@@ -138,7 +142,7 @@ aboutTab.addEventListener('click', () => {
 let about = document.querySelector('.about');
 function showAbout() {
     aboutTab.classList.add('current');
-    startButton.pointerEvents = 'none';
+    startButton.style.pointerEvents = 'none';
     // about.classList.remove('onLoad');
     about.classList.add('show');
 }
@@ -149,3 +153,25 @@ function clearAbout() {
     about.classList.remove('show');
 
 }
+
+// Responsive centering for mobile taking into account font sizes
+// let computedHeightMenu = window.getComputedStyle(menu, 
+//     null).getPropertyValue('height').slice(0,-2);
+
+let menuHeight = menu.offsetTop + menu.offsetHeight;
+
+let computedHeightNav = window.getComputedStyle(navBar, 
+        null).getPropertyValue('height').slice(0,-2);
+
+let availHeight = window.getComputedStyle(container, 
+    null).getPropertyValue('height').slice(0,-2);
+
+console.log(menuHeight, computedHeightNav, availHeight);
+
+let heightDifference = availHeight - computedHeightNav - menuHeight;
+
+console.log(heightDifference);
+
+console.log(typeof heightDifference);
+
+menu.style.setProperty('--calcMargin', `${Math.max(0, heightDifference / 2)}px`);
