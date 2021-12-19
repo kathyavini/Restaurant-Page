@@ -9,8 +9,6 @@ let loaderBackdrop = document.querySelector('.loader-background');
 let navBar = document.querySelector('nav');
 
 window.addEventListener('load', () => {
-
-    console.log("Page is fully loaded");
     setTimeout( () => {
         loader.style.display = 'none';
         loaderBackdrop.style.display = 'none';
@@ -143,35 +141,56 @@ let about = document.querySelector('.about');
 function showAbout() {
     aboutTab.classList.add('current');
     startButton.style.pointerEvents = 'none';
-    // about.classList.remove('onLoad');
+    about.classList.add('onLoad');
     about.classList.add('show');
 }
 
 function clearAbout() {
     aboutTab.classList.remove('current');
-    // about.classList.remove('onLoad');
+    about.classList.remove('onLoad');
     about.classList.remove('show');
 
 }
+
+// A small font size adjust for phones (sorry)
+const touch = matchMedia('(hover: none)').matches;
+if (touch) {
+    let allHTML = document.querySelector('html');
+    let computedFont = window.getComputedStyle(allHTML, 
+    null).getPropertyValue('font-size').slice(0,-2);
+
+    if (computedFont > 20) {
+        allHTML.style.fontSize = '16px';
+    } else if (computedFont <= 16 ) {
+        allHTML.style.fontSize = '18px';
+    }
+}
+
+
+
 
 // Responsive centering for mobile taking into account font sizes
 // let computedHeightMenu = window.getComputedStyle(menu, 
 //     null).getPropertyValue('height').slice(0,-2);
 
-let menuHeight = menu.offsetTop + menu.offsetHeight;
-
-let computedHeightNav = window.getComputedStyle(navBar, 
+function calculateMargin(containerDiv, classDiv, navDiv) {
+    let divHeight = classDiv.offsetTop + classDiv.offsetHeight;
+    console.log("Div height is " + divHeight);
+    let navHeight = window.getComputedStyle(navDiv, 
         null).getPropertyValue('height').slice(0,-2);
-
-let availHeight = window.getComputedStyle(container, 
+    console.log("Nav height is " + navHeight);
+    let availHeight = window.getComputedStyle(containerDiv, 
     null).getPropertyValue('height').slice(0,-2);
+    console.log("Container height is " + availHeight);
 
-console.log(menuHeight, computedHeightNav, availHeight);
+    return (availHeight - divHeight - navHeight);
+}
 
-let heightDifference = availHeight - computedHeightNav - menuHeight;
+let menuMargin = Math.max(0, 
+    calculateMargin(container, menu, navBar) / 2);
+menu.style.setProperty('--calcMargin', `${menuMargin}px`);
 
-console.log(heightDifference);
+let aboutMargin = Math.max(0, 
+    calculateMargin(container, about, navBar) / 2);
+about.style.setProperty('--calcMarginAbout', `${aboutMargin}px`);
 
-console.log(typeof heightDifference);
-
-menu.style.setProperty('--calcMargin', `${Math.max(0, heightDifference / 2)}px`);
