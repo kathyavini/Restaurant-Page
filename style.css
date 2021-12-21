@@ -1,0 +1,556 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2&family=Langar&family=Montez&family=Noto+Sans&family=Noto+Sans+Display&display=swap');
+
+* {
+    /* border: 1px #9a13fd solid; */
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    /* to offset the menu according to fontsize */
+    --calcMargin: 0px;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    place-items: center;
+    font-family: "Noto Sans Display", "Noto Sans", "Open Sans", sans-serif;
+    background-color: #dbc18f;
+    color: hsl(223, 54%, 15%);
+    overflow: hidden;
+    backface-visibility: hidden;
+    position: relative;
+}
+
+
+#content {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 8fr 1fr;
+    grid-template-rows: 1fr 2fr 2fr 30px;
+    place-items: center;
+    position: relative;
+}
+
+/* Loading animation */
+.loader {
+    grid-area: 1 / 2 / 4 / 3;
+    z-index: 9001;
+}
+
+.loader-background {
+    grid-area: 1 / 1 / 5 / 5;
+    width: 100%;
+    height: 100%;
+    background-color: #dbc18f;
+    z-index: 9000;
+}
+
+
+/* Navigation menu */
+nav {
+    grid-area: 1 / 1 / 1 / 4;
+    place-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8vw;
+    z-index: 1000;
+    font-size: clamp(1rem, 1rem + 3vw, 2rem);
+    text-transform: uppercase;
+    opacity: 0;
+    visibility: hidden;
+}
+
+nav.visible {
+    visibility: visible;
+    animation: fadeIn 8s forwards;
+}
+
+nav .tab {
+    transition: transform 300ms ease-in-out;
+}
+
+nav .tab:hover {
+    transform: scale(1.1);
+}
+
+nav .tab:active {
+    transform: scale(1.2);
+}
+
+nav .tab.current {
+    border-bottom: 3px hsl(223, 54%, 15%) solid;
+    border-top: 3px hsl(223, 54%, 15%) solid;
+    padding-block: 4px;
+}
+
+/* Background and intro sequence */
+.background {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-image:
+        url('../src/img/mysore-pak.jpg'),
+        url('../src/img/ladoos.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: hsl(39, 51%, 71%);
+    transform: translate3d(50px, 50px, 0) scale(1.25);
+}
+
+.background.second-image {
+    background-image: 
+        url('../src/img/ladoos.jpg');
+    transform: translate3d(50px, 50px, 0) scale(1.25);
+}
+
+.background.final {
+    background-image: 
+        url('../src/img/malai-peda.jpg');
+}
+
+
+@media (prefers-reduced-motion: no-preference) {
+    .transformed {
+        transform: scale(1);
+        transition: transform 6.5s ease-in-out;
+    }
+
+    .second-image.transformed {
+        transition: transform 4.5s ease-in-out;
+    }
+}
+
+video {
+    opacity: 0;
+    width: 100%;
+    grid-area: 1 / 1 / 5 / 4;
+    z-index: 999;
+    animation: fadeOut 2s forwards;
+    position: absolute;
+}
+
+video.visible {
+    opacity: .8;
+    transition: opacity 3s 5s;
+    animation: fadeIn 10s forwards;
+}
+
+button {
+    z-index: 2000;
+    grid-area: 1 / 2 / 4 / 3;
+    color: black;
+    background-color: white;
+    border: 1px solid white;
+    mix-blend-mode: screen;
+    place-self: center;
+    font-weight: bold;
+    font-size: 3rem;
+    padding-inline: 50px;
+    padding-block: 10px;
+    transition: opacity 3s;
+    border-radius: 5px;
+}
+
+.skip {
+    grid-area: 1 / 1;
+    position: absolute;
+    top: 80vh;
+    right: 5vw;
+    min-width: max-content;
+    color: white;
+    background-color: hsl(223, 54%, 15%, .7);
+    border: 1px solid hsl(223, 54%, 15%);
+    mix-blend-mode: multiply;
+    opacity: 0;
+    transition: opacity 1s;
+    font-size: 2rem;
+    pointer-events: none;
+}
+
+
+/* Intro text */
+.punjabi,
+.english {
+    color: white;
+    z-index: 1002;
+    pointer-events: none;
+}
+
+.punjabi {
+    mix-blend-mode: overlay;
+    font-size: clamp(7rem, 7rem + 5vw, 11rem);
+    grid-area: 1 / 2 / 4 / 3;
+    opacity: 0;
+    font-family: 'Langar', sans-serif;
+    text-align: center;
+}
+
+.punjabi.visible {
+    opacity: 1;
+    transition: opacity 2s 5s;
+}
+
+.punjabi span {
+    font-size: 4rem;
+}
+
+.english {
+    opacity: 0;
+    grid-area: 1 / 2 / 4 / 3;
+}
+
+.english h1{
+    text-transform: uppercase;
+    font-size: clamp(4rem, 4rem + 5vw, 7rem);
+}
+
+.english p {
+    font-family: 'Montez', sans-serif;
+    font-size: clamp(3rem, 3rem + 5vw, 5rem);
+    text-align: right;
+}
+
+.punjabi.transitioned {
+    opacity: 0;
+    transition: opacity 3s 1s;
+}
+
+.english.transitioned {
+    opacity: 1;
+    transition: opacity 5s 3s;
+    /* mix-blend-mode: unset; */
+    color:hsl(223, 54%, 15%);
+}
+
+.english.transitioned.quick {
+    transition: opacity 1s 1s;
+}
+
+
+/* Animations for intro (necessary for video;
+for most other divs transition: opacity seemed 
+to be enough. Still, I sometimes used keyframes, not sure why) */
+
+@keyframes fadeIn{
+    0%      { opacity: 0; }
+    100%    { opacity: 1; }
+}
+
+@keyframes fadeOut{
+    0%      { opacity: 1; }
+    100%    { opacity: 0; }
+}
+
+
+/* Menu */
+.menu,
+.about {
+    grid-area: 2 / 2 / 4 / 3;
+    background-color: hsl(0, 0%, 100%, .2);
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    text-align: center;
+    width: 100%;
+    min-height: max-content;
+    max-width: 1400px;
+    place-self: center;
+}
+
+.show {
+    opacity: 1;
+    transition: opacity 3s;
+}
+
+.menu h2,
+.menu h2 span {
+    font-family: "Montez";
+    font-size: clamp(2rem, 2rem + 3vw, 5rem);
+    padding-top: .5rem;
+}
+
+.menuText {
+    background-color: transparent;
+    font-size: clamp(1rem, 1rem + 2vw, 3rem);
+    max-height: 100%;
+    width: 100%;
+    padding-bottom: 5vh;
+}
+
+.menuText p {
+    font-family: "Noto Sans";
+    font-size: clamp(.5rem, .5rem + 2vw, 2rem);
+}
+
+.menuText div {
+    flex: 1 0 auto;
+}
+
+/* Punjabi to English animation */
+.menuText h3,
+.menu h2,
+.about h3 {
+    font-family: "Montez";
+    position: relative;
+    color:hsl(223, 54%, 15%, 0);
+}
+
+.menuText h3 span,
+.menu h2 span,
+.about h3 span {
+    font-family: "Langar";
+    position: absolute;
+    inset: 0px;
+    color:hsl(223, 54%, 15%);
+}
+
+.menu.onLoad h3,
+.menu.onLoad h2,
+.about.onLoad h3 {
+    color:hsl(223, 54%, 15%, 1);
+    transition: color 5s 3s;
+}
+
+.menu.onLoad h3 span,
+.menu.onLoad h2 span,
+.about.onLoad h3 span{
+    color:hsl(223, 54%, 15%, 0);
+    filter: blur(5px);
+    transition: color 5s 2s, filter 4s 2s;
+}
+
+
+
+
+/* 
+.blur {
+    filter: blur(10px);
+} */
+
+@supports (backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px)){
+    .menu,
+    .about {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+}
+
+
+/* Large width desktop (multiple columns */
+@media screen and (min-width: 750px) {
+    .menuText,
+    .aboutText {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5vh;
+        padding: 5vh;
+    }
+
+    .aboutText.menuText {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+    }
+
+    .about-us {
+        grid-area: 1 / 1 / 2 / 3;
+    }
+
+    .hours {
+        grid-area: 2 / 1 / 3 / 2;
+    }
+
+    .contact {
+        grid-area: 2 / 2 / 3 / 3;
+    }
+
+}
+
+/* For mobile */
+@media (hover: none) {
+    #content {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .loader {
+        position: absolute;
+        top: 40vh;
+    }
+
+    .loader-background {
+        position: absolute;
+    }
+
+    .background {
+        position: absolute;
+        right: 5px; /*weird gap on phone */
+    }
+
+    nav {
+        gap: 4vw;
+        padding-block: 1rem;
+    }
+
+    button {
+        position: absolute;
+        top: 40vh;
+    }
+
+    .skip {
+        top: 75vh;
+        right: auto;
+    }
+
+    .english,
+    .punjabi {
+        position: absolute;
+        width: 95%;
+    }
+
+    .punjabi {
+        top: 15vh;
+    }
+
+    .english {
+        top: 25vh;
+    }
+
+    .english h1 {
+        font-size: clamp(2.5rem, 2.5rem + 7vw, 7rem);
+        text-align: left;
+    }
+
+    .english p {
+        font-size: clamp(2rem, 2rem + 5vw, 5rem)
+    }
+
+    .menu {
+        width: 95%;
+        margin-top: 5vh;
+    }
+
+    .menu h2 {
+        padding-top: 5px;
+    }
+
+    .menuText {
+        padding-bottom: .5rem;
+    }
+
+    
+    .about.menu {
+        position: absolute;
+        margin-top: 0px;
+        top: 15vh;
+        width: 95%;
+    }
+
+    .aboutText.menuText {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 2rem;
+        padding-block: 1rem;
+    }
+}
+
+/* Landscape orientation */
+@media (hover: none) and (orientation: landscape) {
+    .background {
+        top: -10px;
+    }
+
+    nav {
+        gap: 10vw;
+        padding-block: 10px;
+        font-size: clamp(1rem, 1rem + 2vw, 1.5rem);
+    }
+    
+    button {
+        font-size: clamp(1rem, 1rem + 3vw, 3rem);
+        top: 45vh;
+    }
+
+    .skip {
+        top: 60vh;
+        right: 5vw;
+        font-size: clamp(.5rem, .5rem + 3vw, 2rem);
+    }
+
+    .punjabi {
+        font-size: clamp(4rem, 4rem + 7vw, 8rem);
+        top: 20vh;     
+    }
+
+    .english h1 {
+        font-size: clamp(1rem, 1rem + 7vw, 4rem);
+        text-align: left;
+    }
+
+    .english p {
+        font-size: clamp(1rem, 1rem + 5vw, 5rem)
+    }
+
+    .menu h2 {
+        display: none;
+    }
+
+    .menuText {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        padding: 5px;
+        gap: 0;
+        font-size: clamp(.5rem, .5rem + 3vw, 2rem);
+    }
+
+    .menuText p {
+        font-size: clamp(.5rem, .5rem + 1vw, 2rem);
+    }
+
+    .about.menu {
+        margin-top: 5vh;
+    }
+
+    .menuText.aboutText {
+        display: grid;
+        grid-template-columns: 4fr 3fr;
+        grid-template-rows: 3fr 1fr;
+        gap: 0px;
+        padding-block: 0px;
+    }
+
+    .about-us {
+        grid-area: 1 / 1 / 3 / 2;
+    }
+
+    .hours {
+        grid-area: 2 / 2 / 3 / 3;
+    }
+
+    .hours h3 {
+        display: none;
+    }
+
+    .contact {
+        grid-area: 1 / 2 / 2 / 3;
+    }
+
+}
+
+/* for testing */
+/* nav,
+.about {
+    visibility: visible;
+    opacity: 1;
+} */
