@@ -95,8 +95,8 @@ nav .tab.current {
     width: 100vw;
     height: 100vh;
     background-image:
-        url('./img/mysore-pak.jpg'),
-        url('./img/ladoos.jpg');
+        url('../src/img/mysore-pak.jpg'),
+        url('../src/img/ladoos.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -106,13 +106,13 @@ nav .tab.current {
 
 .background.second-image {
     background-image: 
-        url('./img/ladoos.jpg');
+        url('../src/img/ladoos.jpg');
     transform: translate3d(50px, 50px, 0) scale(1.25);
 }
 
 .background.final {
     background-image: 
-        url('./img/malai-peda.jpg');
+        url('../src/img/malai-peda.jpg');
 }
 
 

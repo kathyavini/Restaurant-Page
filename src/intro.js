@@ -49,7 +49,7 @@ function changeImage() {
 // Play video
 const video = document.createElement("video");
 function startVideo() {
-    video.setAttribute('src', "../src/img/chai.mp4#t=2")
+    video.setAttribute('src', "./chai.mp4#t=2")
     video.setAttribute('autoplay', "true");
     video.setAttribute('muted', "true");
     container.appendChild(video);
