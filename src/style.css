@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2&family=Langar&family=Montez&family=Noto+Sans&family=Noto+Sans+Display&display=swap');
 
-
-
 * {
     /* border: 1px #9a13fd solid; */
     box-sizing: border-box;
@@ -13,10 +11,6 @@
     /* to offset the menu according to fontsize */
     --calcMargin: 0px;
 }
-/* 
-html {
-    font-size: 20px;
-} */
 
 body {
     height: 100vh;
@@ -28,10 +22,6 @@ body {
     color: hsl(223, 54%, 15%);
     overflow: hidden;
     backface-visibility: hidden;
-    /* -webkit-transform: translateZ(0);
-    -ms-transform: translateZ(0);
-    transform: translateZ(0); */
-    /* see orig codepen and https://stackoverflow.com/questions/37629745/why-isnt-my-css3-animation-smooth-in-google-chrome-but-very-smooth-on-other-br*/
     position: relative;
 }
 
@@ -47,7 +37,6 @@ body {
 }
 
 /* Loading animation */
-
 .loader {
     grid-area: 1 / 2 / 4 / 3;
     z-index: 9001;
@@ -99,7 +88,6 @@ nav .tab.current {
     border-top: 3px hsl(223, 54%, 15%) solid;
     padding-block: 4px;
 }
-
 
 /* Background and intro sequence */
 .background {
@@ -188,7 +176,6 @@ button {
 
 
 /* Intro text */
-
 .punjabi,
 .english {
     color: white;
@@ -248,8 +235,8 @@ button {
 
 
 /* Animations for intro (necessary for video;
-most other properties transition seemed to be enough but sometimes
-I still used keyframes, not sure why) */
+for most other divs transition: opacity seemed 
+to be enough. Still, I sometimes used keyframes, not sure why) */
 
 @keyframes fadeIn{
     0%      { opacity: 0; }
@@ -263,7 +250,6 @@ I still used keyframes, not sure why) */
 
 
 /* Menu */
-
 .menu,
 .about {
     grid-area: 2 / 2 / 4 / 3;
@@ -340,11 +326,6 @@ I still used keyframes, not sure why) */
     transition: color 5s 2s, filter 4s 2s;
 }
 
-.about {
-    position: absolute;
-    margin-top: auto;
-}
-
 
 
 
@@ -361,13 +342,6 @@ I still used keyframes, not sure why) */
     }
 }
 
-
-/* for testing */
-/* nav,
-.about {
-    visibility: visible;
-    opacity: 1;
-} */
 
 /* Large width desktop (multiple columns */
 @media screen and (min-width: 750px) {
@@ -463,8 +437,8 @@ I still used keyframes, not sure why) */
     }
 
     .menu {
-        margin-top: var(--calcMargin);
         width: 95%;
+        margin-top: 5vh;
     }
 
     .menu h2 {
@@ -475,8 +449,11 @@ I still used keyframes, not sure why) */
         padding-bottom: .5rem;
     }
 
-    .about {
-        margin-top: calc(var(--calcMarginAbout) + 7vh);
+    
+    .about.menu {
+        position: absolute;
+        margin-top: 0px;
+        top: 15vh;
         width: 95%;
     }
 
@@ -541,8 +518,8 @@ I still used keyframes, not sure why) */
         font-size: clamp(.5rem, .5rem + 1vw, 2rem);
     }
 
-    .about {
-        width: 100%;
+    .about.menu {
+        margin-top: 5vh;
     }
 
     .menuText.aboutText {
@@ -570,3 +547,10 @@ I still used keyframes, not sure why) */
     }
 
 }
+
+/* for testing */
+/* nav,
+.about {
+    visibility: visible;
+    opacity: 1;
+} */

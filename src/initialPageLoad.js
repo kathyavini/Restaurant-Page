@@ -1,13 +1,56 @@
 import navBar from './navbar';
-import mainContent from './mainContent';
+import { loader, loaderBackdrop } from './loading-animation';
+import { startButton, skipButton } from './buttons';
+import { punjabi, english } from './introText.js';
+import { playIntro } from "./intro.js"
+import { menu } from './menu';
+import { about } from './about';
 
 
-export default function pageLoad() {
-    const content = document.querySelector('#content');
+export default function initialPageLoad() {
+    const container = document.querySelector('#content');
+
+    // Create and render background
+    const background = document.createElement('div');
+    background.classList.add('background');
+    container.appendChild(background);
+
+    // Render loader
+    container.appendChild(loaderBackdrop);
+    container.appendChild(loader);
 
     // Render Nav Bar
-    content.appendChild(navBar);
+    container.appendChild(navBar);
 
-    // Render Main Content
-    content.appendChild(mainContent);
+    // Render buttons
+    container.appendChild(startButton);
+    container.appendChild(skipButton);
+
+    // Render intro text
+    container.appendChild(punjabi);
+    container.appendChild(english);
+
+    // Show the loading animation until page is loaded, plus buffer
+    window.addEventListener('load', () => {
+        setTimeout( () => {
+            loader.style.display = 'none';
+            loaderBackdrop.style.display = 'none';
+        }, 1500);
+    
+    })
+
+    // Play intro via setting up event Listeners
+    playIntro();
+
+    // Intro tab should be highlighted
+    const introTab = document.querySelector('#intro');
+    introTab.classList.add('current');
+
+    // Render menu
+    container.appendChild(menu);
+    
+    // Render about
+    container.appendChild(about);
+
+    return [container, background];
 }
