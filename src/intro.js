@@ -9,6 +9,7 @@ function playIntro() {
         background.classList.add('transformed');
         background.addEventListener('transitionend', changeImage);
         startButton.style.opacity = '0';
+        startButton.style.pointerEvents = 'none';
         skipButton.style.opacity = '1';
         skipButton.style.pointerEvents = 'initial';
     })
@@ -40,6 +41,7 @@ function changeImage() {
     background.classList.add('second-image');
     background.classList.add('transformed');
     skipButton.style.opacity = '0';
+    skipButton.style.pointerEvents = 'none';
 
     background.removeEventListener('transitionend', changeImage);
     
