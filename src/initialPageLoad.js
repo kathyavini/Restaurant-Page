@@ -1,8 +1,6 @@
 import navBar from './navbar';
-import { loader, loaderBackdrop } from './loading-animation';
-import { startButton, skipButton } from './buttons';
-import { punjabi, english } from './introText.js';
-import { playIntro } from "./intro.js"
+import { loader, loaderBackdrop } from './utils';
+import { startButton, skipButton, punjabi, english, playIntro } from './intro.js';
 import { menu } from './menu';
 import { about } from './about';
 

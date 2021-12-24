@@ -45,6 +45,14 @@ button {
     padding-block: 10px;
     transition: opacity 3s;
     border-radius: 5px;
+    /* Default is disabled */
+    pointer-events: none;
+    opacity: 0;
+}
+
+button.clickable {
+    pointer-events: initial;
+    opacity: 1;
 }
 
 .skip {

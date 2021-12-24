@@ -1,4 +1,4 @@
-import createNewElement from "./utils";
+import { createNewElement } from "./utils";
 
 const menuItems = [
     {

@@ -1,5 +1,4 @@
-// Curious if this makes DOM creation more resource intensive?
-export default function createNewElement ( 
+function createNewElement ( 
             type, classes = null, text = null, attributes = null) {
 
     let createdElement = document.createElement(type);
@@ -20,3 +19,29 @@ export default function createNewElement (
 
     return createdElement;
 }
+
+function adjustFontSizes() {
+    const touch = matchMedia('(hover: none)').matches;
+
+    if (touch) {
+        let allHTML = document.querySelector('html');
+        let computedFont = window.getComputedStyle(allHTML, 
+        null).getPropertyValue('font-size').slice(0,-2);
+
+        if (computedFont > 20) {
+            allHTML.style.fontSize = '16px';
+        } else if (computedFont <= 16 ) {
+            allHTML.style.fontSize = '18px';
+        }
+    }
+}
+
+export {createNewElement, adjustFontSizes}
+
+
+const loader = createNewElement('div', ['loader', 'lds-default']);
+loader.innerHTML = "<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>";
+
+const loaderBackground = createNewElement('div', ['loader-background']);
+
+export {loader, loaderBackground as loaderBackdrop}

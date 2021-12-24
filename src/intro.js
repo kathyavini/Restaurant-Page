@@ -1,33 +1,45 @@
-
-import { startButton, skipButton } from './buttons';
+import { createNewElement } from "./utils";
 import { container, background } from './index.js';
-import { punjabi, english } from './introText.js';
 import navBar from './navbar';
 
+// Create elements of the intro sequence and main page
+// Create buttons
+export const startButton = createNewElement('button', ['clickable'], "Enter");
+export const skipButton = createNewElement('button', ['skip'], "Skip Intro");
+
+// Create main text
+const punjabi = createNewElement('h1', ['punjabi']);
+punjabi.innerHTML = 'ਲਾਡੀ <span>ਦੇ</span> ਲੱਡੂ';
+
+const english = createNewElement('div',['english']);
+const englishTitle = createNewElement('h1', null, "Laddi's Laddoos");
+const englishSubtitle = createNewElement('p', null, "...Quality Sweets and Chai");
+
+english.append(englishTitle, englishSubtitle);
+
+export { punjabi, english }
+
+// Add event handler to the start button to play sequence
 function playIntro() {
-    // Add Event Listeners to buttons
     startButton.addEventListener('click', () => {
         background.classList.add('transformed');
 
         background.addEventListener('transitionend', changeImage);
 
-        startButton.style.opacity = '0';
-        startButton.style.pointerEvents = 'none';
-        skipButton.style.opacity = '1';
-        skipButton.style.pointerEvents = 'initial';
+        startButton.classList.remove('clickable');
+        skipButton.classList.add('clickable');
     })
 
     skipButton.addEventListener('click', () => {
         english.classList.add('quick');
         makeFinalState();
-        skipButton.style.opacity = '0';
+        skipButton.classList.remove('clickable')
     })
 }
 
 function makeInitialState() {
-    skipButton.style.pointerEvents = 'none';
-    startButton.style.opacity = '1';
-    startButton.style.pointerEvents = 'initial';
+    skipButton.classList.remove('clickable');
+    startButton.classList.add('clickable');
 
     english.style.visibility = 'visible';
     punjabi.classList.remove('visible', 'transitioned');
@@ -41,8 +53,7 @@ function changeImage() {
     background.classList.remove('transformed');
     background.classList.add('second-image', 'transformed');
 
-    skipButton.style.opacity = '0';
-    skipButton.style.pointerEvents = 'none';
+    skipButton.classList.remove('clickable');
 
     background.removeEventListener('transitionend', changeImage);
     
