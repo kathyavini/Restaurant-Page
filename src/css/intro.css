@@ -1,0 +1,136 @@
+.background.second-image {
+    background-image: 
+        url('../img/ladoos.jpg');
+    transform: translate3d(50px, 50px, 0) scale(1.25);
+}
+
+.background.final {
+    background-image: 
+        url('../img/malai-peda.jpg');
+}
+
+
+@media (prefers-reduced-motion: no-preference) {
+    .transformed {
+        transform: scale(1);
+        transition: transform 6.5s ease-in-out;
+    }
+
+    .second-image.transformed {
+        transition: transform 4.5s ease-in-out;
+    }
+}
+
+video {
+    width: 100%;
+    grid-area: 1 / 1 / 5 / 4;
+    animation: fadeOut 2s forwards;
+    position: absolute;
+}
+
+video.visible {
+    opacity: .8;
+    animation: fadeIn 10s forwards;
+}
+
+button {
+    z-index: var(--middle);
+    grid-area: 1 / 2 / 4 / 3;
+    background-color: white;
+    border: 1px solid white;
+    mix-blend-mode: screen;
+    font-weight: bold;
+    font-size: 3rem;
+    padding-inline: 50px;
+    padding-block: 10px;
+    transition: opacity 3s;
+    border-radius: 5px;
+}
+
+.skip {
+    grid-area: 1 / 1;
+    position: absolute;
+    top: 80vh;
+    right: 5vw;
+    min-width: max-content;
+    color: white;
+    background-color: hsl(223, 54%, 15%, .7);
+    border: 1px solid hsl(223, 54%, 15%);
+    mix-blend-mode: multiply;
+    opacity: 0;
+    transition: opacity 1s;
+    font-size: 2rem;
+    pointer-events: none;
+}
+
+/* Intro text */
+.punjabi,
+.english {
+    color: white;
+    z-index: var(--middle);
+    pointer-events: none;
+}
+
+.punjabi {
+    mix-blend-mode: overlay;
+    font-size: clamp(7rem, 7rem + 5vw, 11rem);
+    grid-area: 1 / 2 / 4 / 3;
+    opacity: 0;
+    font-family: 'Langar', cursive;
+    text-align: center;
+}
+
+.punjabi.visible {
+    opacity: 1;
+    transition: opacity 2s 5s;
+}
+
+.punjabi span {
+    font-size: 4rem;
+}
+
+.english {
+    opacity: 0;
+    grid-area: 1 / 2 / 4 / 3;
+}
+
+.english h1{
+    text-transform: uppercase;
+    font-size: clamp(4rem, 4rem + 5vw, 7rem);
+}
+
+.english p {
+    font-family: 'Montez', cursive;
+    font-size: clamp(3rem, 3rem + 5vw, 5rem);
+    text-align: right;
+}
+
+.punjabi.transitioned {
+    opacity: 0;
+    transition: opacity 3s 1s;
+}
+
+.english.transitioned {
+    opacity: 1;
+    transition: opacity 5s 3s;
+    color:hsl(223, 54%, 15%);
+}
+
+.english.transitioned.quick {
+    transition: opacity 1s 1s;
+}
+
+
+/* Keyframe animations only strictly 
+necessary for video - rest can be controlled
+with transition: opacity */
+
+@keyframes fadeIn{
+    0%      { opacity: 0; }
+    100%    { opacity: 1; }
+}
+
+@keyframes fadeOut{
+    0%      { opacity: 1; }
+    100%    { opacity: 0; }
+}

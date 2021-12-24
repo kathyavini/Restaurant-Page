@@ -1,3 +1,9 @@
+import "./css/loading-io.css";
+import "./css/styles.css";
+import "./css/intro.css";
+import "./css/menu-about.css";
+import "./css/mobile.css";
+
 import initialPageLoad from './initialPageLoad';
 import { startButton } from './buttons';
 import { makeInitialState, clearMain} from "./intro";

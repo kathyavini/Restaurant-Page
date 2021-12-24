@@ -3,7 +3,6 @@ import { startButton, skipButton } from './buttons';
 import { container, background } from './index.js';
 import { punjabi, english } from './introText.js';
 import navBar from './navbar';
-import createNewElement from "./utils";
 
 function playIntro() {
     // Add Event Listeners to buttons
@@ -51,10 +50,12 @@ function changeImage() {
 }
 
 // Play video
-const video = createNewElement('video', null, null, { 'src': "./img/chai.mp4#t=2", 'muted': 'true' });
+const video = document.createElement('video');
 
 function startVideo() {
-    // This will throw a warning and block autoplay unless set inside the event listener
+    // Oddly this won't work unless all set inside the event listener
+    video.setAttribute('src', "./img/chai.mp4#t=2")
+    video.setAttribute('muted','true');
     video.setAttribute('autoplay', 'true');
     container.appendChild(video);
     video.classList.add('visible');

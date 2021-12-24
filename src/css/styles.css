@@ -1,0 +1,104 @@
+/* For managing z-indices.
+Related to https://www.smashingmagazine.com/2021/02/css-z-index-large-projects/ */
+
+:root {
+    --overlay: 100;
+    --main: 10;
+    --middle: 50;
+}
+
+* {
+    /* border: 1px #9a13fd solid; */
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    place-items: center;
+    font-family: "Open Sans", sans-serif;
+    background-color: #dbc18f;
+    color: hsl(223, 54%, 15%);
+    overflow: hidden;
+    backface-visibility: hidden;
+}
+
+
+#content {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 8fr 1fr;
+    grid-template-rows: 1fr 2fr 2fr 30px;
+    place-items: center;
+    position: relative;
+}
+
+/* Loading animation */
+.loader {
+    grid-area: 1 / 2 / 4 / 3;
+    z-index: calc(var(--overlay) + 1);
+}
+
+.loader-background {
+    grid-area: 1 / 1 / 5 / 5;
+    width: 100%;
+    height: 100%;
+    background-color: #dbc18f;
+    z-index: var(--overlay);
+}
+
+/* Site background */
+.background {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-image:
+        url('../img/mysore-pak.jpg'),
+        url('../img/ladoos.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: hsl(39, 51%, 71%);
+    transform: translate3d(50px, 50px, 0) scale(1.25);
+}
+
+/* Navigation menu */
+nav {
+    grid-area: 1 / 1 / 1 / 4;
+    place-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8vw;
+    font-size: clamp(1rem, 1rem + 3vw, 2rem);
+    text-transform: uppercase;
+    z-index: calc(var(--main) + 1);
+    visibility: hidden;
+}
+
+nav.visible {
+    visibility: visible;
+    animation: fadeIn 8s forwards;
+}
+
+nav .tab {
+    transition: transform 300ms ease-in-out;
+}
+
+nav .tab:hover {
+    transform: scale(1.1);
+}
+
+nav .tab:active {
+    transform: scale(1.2);
+}
+
+nav .tab.current {
+    border-bottom: 3px hsl(223, 54%, 15%) solid;
+    border-top: 3px hsl(223, 54%, 15%) solid;
+    padding-block: 4px;
+}
