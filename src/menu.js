@@ -76,11 +76,6 @@ function renderItemDiv(name, titleEnglish,
     menuText.appendChild(itemDiv);
 }
 
-// // Trigger animation once loaded
-// menu.addEventListener('load', () => {
-//     menu.classList.add('onLoad','show')
-// });
-
 function showMenu() {
     menu.classList.add('onLoad','show');
 
@@ -89,6 +84,4 @@ function clearMenu() {
     menu.classList.remove('onLoad', 'show');
 }
 
-// Do you think there is any advantage to making the div and appending it in the same module?
-// Besides meeting spec, does it have an advantage for memory?
 export {menu, showMenu, clearMenu}

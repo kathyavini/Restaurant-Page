@@ -10,15 +10,13 @@ import { showAbout, clearAbout } from './about';
 import { showMenu, clearMenu } from './menu';
 import { adjustFontSizes } from './utils';
 
-// Exporting for use in the intro sequence once page load function is run
+// Exporting for use in the intro sequence
 export const [container, background] = initialPageLoad();
 
-// Identify tabs - could possibly change this to an export from navBar
 const aboutTab = document.querySelector('#about');
 const menuTab = document.querySelector('#menu');
 const introTab = document.querySelector('#intro');
 
-// Intro tab
 introTab.addEventListener('click', () => {
     clearActiveTab();
     introTab.classList.add('current');
@@ -27,7 +25,6 @@ introTab.addEventListener('click', () => {
     makeInitialState();
 });
 
-// About tab
 aboutTab.addEventListener('click', () => {
     clearActiveTab();
     aboutTab.classList.add('current');
@@ -36,7 +33,6 @@ aboutTab.addEventListener('click', () => {
     showAbout();
 });
 
-// Menu Tab
 menuTab.addEventListener('click', () => {
     clearActiveTab();
     menuTab.classList.add('current');

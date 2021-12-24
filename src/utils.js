@@ -21,6 +21,7 @@ function createNewElement (
 }
 
 function adjustFontSizes() {
+    // Only for mobile/tablet
     const touch = matchMedia('(hover: none)').matches;
 
     if (touch) {
@@ -38,8 +39,9 @@ function adjustFontSizes() {
 
 export {createNewElement, adjustFontSizes}
 
-
+// Loading animation
 const loader = createNewElement('div', ['loader', 'lds-default']);
+
 loader.innerHTML = "<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>";
 
 const loaderBackground = createNewElement('div', ['loader-background']);

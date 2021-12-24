@@ -7,7 +7,7 @@ import navBar from './navbar';
 export const startButton = createNewElement('button', ['clickable'], "Enter");
 export const skipButton = createNewElement('button', ['skip'], "Skip Intro");
 
-// Create main text
+// Create title text
 const punjabi = createNewElement('h1', ['punjabi']);
 punjabi.innerHTML = 'ਲਾਡੀ <span>ਦੇ</span> ਲੱਡੂ';
 
@@ -19,7 +19,7 @@ english.append(englishTitle, englishSubtitle);
 
 export { punjabi, english }
 
-// Add event handler to the start button to play sequence
+// Add event handler to the start button to play intro sequence
 function playIntro() {
     startButton.addEventListener('click', () => {
         background.classList.add('transformed');
@@ -60,9 +60,8 @@ function changeImage() {
     setTimeout(startVideo, 2000);
 }
 
-// Play video
+// Create and play video
 const video = document.createElement('video');
-
 function startVideo() {
     // Oddly this won't work unless all set inside the event listener
     video.setAttribute('src', "./img/chai.mp4#t=2")

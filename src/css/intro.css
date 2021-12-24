@@ -128,11 +128,6 @@ button.clickable {
     transition: opacity 1s 1s;
 }
 
-
-/* Keyframe animations only strictly 
-necessary for video - rest can be controlled
-with transition: opacity */
-
 @keyframes fadeIn{
     0%      { opacity: 0; }
     100%    { opacity: 1; }
