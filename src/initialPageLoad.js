@@ -35,7 +35,7 @@ export default function initialPageLoad() {
         setTimeout( () => {
             loader.style.display = 'none';
             loaderBackdrop.style.display = 'none';
-        }, 1500);
+        }, 2000);
     
     })
 

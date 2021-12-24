@@ -1,10 +1,8 @@
-const loader = document.createElement('div');
-loader.classList.add('loader');
-loader.classList.add('lds-default');
-loader.innerHTML = "<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>";
-// Is it a problem when used like this? Ask on Discord!
+import createNewElement from "./utils";
 
-const loaderBackground = document.createElement('div');
-loaderBackground.classList.add('loader-background');
+const loader = createNewElement('div', ['loader', 'lds-default']);
+loader.innerHTML = "<div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>";
+
+const loaderBackground = createNewElement('div', ['loader-background']);
 
 export {loader, loaderBackground as loaderBackdrop}

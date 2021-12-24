@@ -1,3 +1,5 @@
+import createNewElement from "./utils";
+
 const menuItems = [
     {
         name: "gujiya",
@@ -38,55 +40,55 @@ const menuItems = [
 
 ]
 
-// Render container
-const menu = document.createElement('div');
-menu.classList.add('menu');
+const menu = createNewElement('div', ['menu']);
 
-const menuHeading = document.createElement('h2');
-menuHeading.innerHTML = "Menu <span>ਮੀਨੂ</span>";
-menu.appendChild(menuHeading);
+const menuHeading = createNewElement('h2', null, "Menu");
+const menuHeadingPunjabi = createNewElement('span', null, "ਮੀਨੂ");
 
-const menuText = document.createElement('div');
-menuText.classList.add('menuText');
-menu.appendChild(menuText);
+const menuText = createNewElement('div', ['menuText']);
 
-// Render items
+menuHeading.appendChild(menuHeadingPunjabi);
+menu.append(menuHeading, menuText);
 
+
+// Create div for each menu item
 menuItems.forEach(item => {
-    renderMenuItem(item.name, item.titleEnglish,
+    renderItemDiv(item.name, item.titleEnglish,
         item.titlePunjabi, item.description);
 })
 
 
-function renderMenuItem(name, titleEnglish, 
+function renderItemDiv(name, titleEnglish, 
             titlePunjabi, description) {
     
-    let itemDiv = document.createElement('div');
-    itemDiv.classList.add(name);
+    // Create elements
+    let itemDiv = createNewElement('div', [name]);
 
-    let itemTitle = document.createElement('h3');
-    itemTitle.textContent = titleEnglish;
-    let punjabiTitle = document.createElement('span');
-    punjabiTitle.textContent = titlePunjabi;
+    let itemTitle = createNewElement('h3', null, titleEnglish);
+    let punjabiTitle = createNewElement('span', null, titlePunjabi);
+
+    let itemDescription = createNewElement('p', null, description);
+
+    // Append
     itemTitle.appendChild(punjabiTitle);
-
-    let itemDescription = document.createElement('p');
-    itemDescription.textContent = description;
-
-    itemDiv.appendChild(itemTitle);
-    itemDiv.appendChild(itemDescription);
+    itemDiv.append(itemTitle, itemDescription);
 
     menuText.appendChild(itemDiv);
 }
 
+// // Trigger animation once loaded
+// menu.addEventListener('load', () => {
+//     menu.classList.add('onLoad','show')
+// });
+
 function showMenu() {
-    menu.classList.add('onLoad');
-    menu.classList.add('show');
+    menu.classList.add('onLoad','show');
+
 }
 function clearMenu() {
-    menu.classList.remove('onLoad');
-    menu.classList.remove('show');
-
+    menu.classList.remove('onLoad', 'show');
 }
 
+// Do you think there is any advantage to making the div and appending it in the same module?
+// Besides meeting spec, does it have an advantage for memory?
 export {menu, showMenu, clearMenu}

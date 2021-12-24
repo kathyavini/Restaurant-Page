@@ -1,3 +1,5 @@
+import createNewElement from "./utils";
+
 const aboutInfo = [
     {
         name: "about-us",
@@ -27,14 +29,10 @@ const aboutInfo = [
     },
 ]
 
-// Render in the menu
-const about = document.createElement('div');
-about.classList.add('about');
-about.classList.add('menu'); // to inherent styling
+// menu classes included to inherent styling
+const about = createNewElement('div', ['about', 'menu']);
+const aboutText = createNewElement('div', ['aboutText', 'menuText']);
 
-const aboutText = document.createElement('div');
-aboutText.classList.add('aboutText');
-aboutText.classList.add('menuText'); // to inherent styling
 about.appendChild(aboutText);
 
 // Render information
@@ -42,26 +40,22 @@ aboutInfo.forEach(section => {
 
     renderInfoSection(section.name, section.titleEnglish,
         section.titlePunjabi, section.description);
+
 })
 
 
 function renderInfoSection(name, titleEnglish, 
             titlePunjabi, description) {
     
-    let sectionDiv = document.createElement('div');
-    sectionDiv.classList.add(name);
-
-    let sectionTitle = document.createElement('h3');
-    sectionTitle.textContent = titleEnglish;
-    let punjabiTitle = document.createElement('span');
-    punjabiTitle.textContent = titlePunjabi;
+    let sectionDiv = createNewElement('div', [name]);
+    let sectionTitle = createNewElement('h3', null, titleEnglish);
+    let punjabiTitle = createNewElement('span', null, titlePunjabi);
     
     sectionTitle.appendChild(punjabiTitle);
     sectionDiv.appendChild(sectionTitle);
 
     description.forEach(line => {
-        let sectionDescription = document.createElement('p');
-        sectionDescription.textContent = line;
+        let sectionDescription = createNewElement('p', null, line);
         sectionDiv.appendChild(sectionDescription);
     })
 
